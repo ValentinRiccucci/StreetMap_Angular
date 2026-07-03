@@ -1,6 +1,7 @@
 import {Component, signal, WritableSignal} from '@angular/core';
 import { LeafletDirective } from '@bluehalo/ngx-leaflet';
 import {LatLng, latLng, tileLayer} from 'leaflet';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-map',
@@ -30,4 +31,31 @@ export class MapPage{
 
     this.center.set(next);
   }
+
+
+  adresseForm = new FormGroup<{
+    numero: FormControl<number>;
+    rue: FormControl<string>;
+    code_Postal: FormControl<number>;
+    id: FormControl<string>;
+  }>({
+    numero: new FormControl<number>(0, [
+      Validators.required,
+    ]),
+    rue: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(250),
+    ]),
+    code_Postal: new FormControl<number>(0, [
+      Validators.maxLength(5),
+        Validators.minLength(5),
+        //Validators.pattern(/^\d+$/)
+    ]),
+    id: new FormControl<string>('', [
+      Validators.maxLength(5),
+  Validators.minLength(5),
+  //Validators.pattern(/^\d+$/)
+]),
+  });
+
 }
