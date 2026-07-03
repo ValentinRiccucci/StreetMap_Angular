@@ -1,0 +1,9 @@
+<button type="button" class="map-action" (click)="changePosition()">
+  Changer la position
+</button>
+
+<div style="height: 600px;"
+     leaflet
+     [leafletOptions]="options"
+     [(leafletCenter)]="center">
+</div>
