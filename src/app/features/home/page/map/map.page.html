@@ -1,9 +1,77 @@
 <button type="button" class="map-action" (click)="changePosition()">
   Changer la position
 </button>
+<p-card header="Rechercher adresse">
+    <form [formGroup]="adresseForm" (submit)="onSubmit()">
+        <!--    test {{ nouveauLivre | json }}-->
+        <!--    test {{ livreForm.value | json }}-->
+        <div class="flex flex-col gap-y-3">
+            <div class="flex flex-col">
+                <p-iftalabel>
+                    <input
+                            class="min-w-96"
+                            id="id"
+                            size="small"
+                            pInputText
+                            maxlength="20"
+                            formControlName="id"
+                    />
+                    <label for="titre">ID</label>
+                </p-iftalabel>
+                <p-iftalabel>
+                    <p-input-number inputStyleClass="min-w-96" required id="numero" size="small" formControlName="numero"></p-input-number>
+                    <label for="numero">Numéro</label>
+                </p-iftalabel>
+            </div>
+            <p-iftalabel>
+                <input
+                        class="min-w-96"
+                        id="rue"
+                        size="small"
+                        pInputText
+                        required
+                        maxlength="250"
+                        formControlName="rue"
+                />
+                <label for="rue">Rue</label>
+            </p-iftalabel>
+            <p-iftalabel>
+                <p-input-number inputStyleClass="min-w-96" required id="code_Postal" size="small" formControlName="code_Postal"></p-input-number>
+                <label for="code_Postal">Code Postal</label>
+            </p-iftalabel>
 
-<div style="height: 600px;"
+
+            <!--    <p-iftalabel>-->
+            <!--        <p-autoComplete-->
+            <!--                id="genre"-->
+            <!--                inputStyleClass="min-w-96"-->
+            <!--                class="min-w-96"-->
+            <!--                size="small"-->
+            <!--                [suggestions]="genresSuggestions"-->
+            <!--                (completeMethod)="onGenreComplete($event.query)"-->
+            <!--                appendTo="body"-->
+            <!--                optionLabel="libelle"-->
+            <!--                [multiple]="true"-->
+            <!--                [dropdown]="true"-->
+            <!--                formControlName="genre"-->
+            <!--        ></p-autoComplete>-->
+            <!--        <label for="genre">Genre</label>-->
+            <!--    </p-iftalabel>-->
+
+        </div>
+            <div class="flex justify-between w-full border-t border-gray-300 pt-2">
+                <button pButton  severity="primary" label="Enregistrer"></button>
+            </div>
+
+    </form>
+
+</p-card>
+
+
+<div id="map" style="height: 600px;"
      leaflet
      [leafletOptions]="options"
+     [leafletLayersControl]="layersControl"
      [(leafletCenter)]="center">
+
 </div>

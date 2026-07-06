@@ -12,18 +12,18 @@ export interface AdresseModel {
   code_insee_ancienne_commune?: number;
   nom_ancienne_commune?: string;
   x?: number;
-  y?:number;
+  y?: number;
   lon?: number;
   lat?: number;
   type_position?: string;
   alias?: string;
   nom_ld?: string;
-  libelle_acheminement?:string;
-  nom_afnor?:string;
-  source_position?:string;
-  source_nom_voie?:string;
-  certification_commune?:boolean;
-  cad_parcelles?:string;
+  libelle_acheminement?: string;
+  nom_afnor?: string;
+  source_position?: string;
+  source_nom_voie?: string;
+  certification_commune?: boolean;
+  cad_parcelles?: string;
 }
 
 export const defaultAdresseModel: AdresseModel = {
