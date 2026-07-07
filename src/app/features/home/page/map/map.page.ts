@@ -1,4 +1,4 @@
-import {Component, inject, signal, WritableSignal} from '@angular/core';
+import {AfterViewInit, Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {LeafletDirective, LeafletLayersControlDirective} from '@bluehalo/ngx-leaflet';
 import L, {icon, LatLng, latLng, marker, tileLayer} from 'leaflet';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -18,7 +18,8 @@ import {AdressesCrud} from "../../services/adresses.crud";
   templateUrl: './map.page.html',
   styleUrl: './map.page.scss',
 })
-export class MapPage{
+export class MapPage implements OnInit{
+
   readonly #messageService: MessageService = inject(MessageService);
   readonly #adressesCRUD: AdressesCrud = inject(AdressesCrud);
   readonly #router: Router = inject(Router);
@@ -26,7 +27,10 @@ export class MapPage{
   private readonly defaultCenter = latLng(46.32292197490511, -0.45840862229322993);
   private readonly alternativeCenter = latLng(46.57880562216769, 0.356848199800482);
 
-  adresse: AdresseModel | undefined;
+  //adresse: AdresseModel | undefined;
+
+  ngOnInit(): void {
+  }
 
   marker = marker([ 46.32292197490511,-0.45840862229322993 ], {
     icon: icon({
@@ -40,7 +44,6 @@ export class MapPage{
 
   layersControl = {
     baseLayers: {
-
     },
     overlays: {
       'Marker': this.marker,
@@ -72,17 +75,14 @@ export class MapPage{
   changePositionXY(x: number | undefined, y: number | undefined): void {
     const current = this.center();
 
-    if ( x !== undefined) {
-      current.lat = x;
-      console.log(current.lat);
-    }
-    if (y !== undefined) {
-      current.lng = y;
-      console.log(current.lng);
-    }
-    this.center.set(current);
+    const next = latLng(
+        x ?? current.lat,
+        y ?? current.lng
+    );
 
-    this.marker.setLatLng(current);
+    this.center.set(next);
+    console.log(this.center());
+    this.marker.setLatLng(next);
   }
 
 

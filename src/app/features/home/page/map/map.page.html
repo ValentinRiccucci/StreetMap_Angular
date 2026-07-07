@@ -68,10 +68,12 @@
 </p-card>
 
 
-<div id="map" style="height: 600px;"
+<div id="mape" style="height: 600px;"
      leaflet
      [leafletOptions]="options"
      [leafletLayersControl]="layersControl"
-     [(leafletCenter)]="center">
+     [(leafletCenter)]="center"
+    (leafletCenterChange)="center.set($event)">
 
 </div>
+
